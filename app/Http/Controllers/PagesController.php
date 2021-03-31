@@ -144,7 +144,7 @@ class PagesController extends Controller
            "tx_ref"          => time(),
            "amount"          => $total_amount,
            "currency"        => $exchangeCurrency,
-           "redirect_url"    => "http://127.0.0.1:8000/",
+           "redirect_url"    => "https://fremit.herokuapp.com/",
            "payment_options" => "card",
            "meta" => [
               "price"=> $total_amount
