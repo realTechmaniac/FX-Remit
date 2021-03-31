@@ -150,7 +150,7 @@ class PagesController extends Controller
                    ],
                    "customer" => [
 
-                      "email"=>  $useremail
+                      "email"=>  $email
                    ],
                    "customizations"=> [
                       "title"=> "Pied Piper Payments",
