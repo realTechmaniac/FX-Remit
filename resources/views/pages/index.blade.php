@@ -145,9 +145,10 @@
 
                         <label for="exampleFormControlSelect1" class="font-weight-bold">Send Currency</label>
                         <select class="form-control" id="myselect2" name="recipientcurrency" >
+                         <option value="NGN">NGN</option>
                           <option value="KES">KES</option>
                           <option value="GHS">GHS</option>
-                          <option value="NGN">NGN</option>
+                         
             
                         </select>
                     </div>
