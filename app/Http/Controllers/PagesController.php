@@ -143,7 +143,7 @@ class PagesController extends Controller
                    "tx_ref"          => time(),
                    "amount"          => $total_amount,
                    "currency"        => $currency,
-                   "redirect_url"    => "https://app.sproutpay.net/safevestapp",
+                   "redirect_url"    => "https://fremit.herokuapp.com/",
                    "payment_options" => "card",
                    "meta" => [
                       "price"=> $total_amount
