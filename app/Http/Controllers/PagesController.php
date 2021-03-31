@@ -21,8 +21,6 @@ class PagesController extends Controller
 
     public function store(Request $request){
 
-
-    
         $request->validate([
 
             'firstName'        => 'required',
@@ -35,7 +33,7 @@ class PagesController extends Controller
 
             'sendercurrency'    => 'required',
 
-            'amount'            => 'required|numeric',
+            'amount'            => 'required|numeric|min:50|max:10000',
 
             'recipientcurrency' => 'required'
 
