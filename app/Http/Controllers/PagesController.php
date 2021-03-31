@@ -176,7 +176,7 @@ class PagesController extends Controller
                   CURLOPT_CUSTOMREQUEST  => "POST",
                   CURLOPT_POSTFIELDS     => json_encode($collected_data),
                     CURLOPT_HTTPHEADER => array(
-                    "Authorization: FLWSECK-0bb5bcb9f43c87d58aa78ec3f420c00e-X",
+                    "Authorization: FLWSECK-6180b3f1f4a4a824604c5b183cebd3d1-X",
                     "content-type: application/json",
                     "cache-control: no-cache"       
                   ),
