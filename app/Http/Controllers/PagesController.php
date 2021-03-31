@@ -138,83 +138,81 @@ class PagesController extends Controller
 
             //  new TransactionCreated($transaction)
             // );
-         $collected_data  = [
+        
+        $collected_data  = [
 
-                   "tx_ref"          => time(),
-                   "amount"          => $total_amount,
-                   "currency"        => $currency,
-                   "redirect_url"    => "https://fremit.herokuapp.com/",
-                   "payment_options" => "card",
-                   "meta" => [
-                      "price"=> $total_amount
-                   ],
-                   "customer" => [
-
-                      "email"=>  $email
-                   ],
-                   "customizations"=> [
-                      "title"=> "Pied Piper Payments",
-                      "description"=> "Middleout isn't free. Pay the price",
-                      "logo"=> "https://assets.piedpiper.com/logo.png"
-                   ]
-                ];
-
-
-                
-                //send Data to flutterwave Endpoints::-->
+           "tx_ref"          => time(),
+           "amount"          => $total_amount,
+           "currency"        => $exchangeCurrency,
+           "redirect_url"    => "http://127.0.0.1:8000/",
+           "payment_options" => "card",
+           "meta" => [
+              "price"=> $total_amount
+           ],
+           "customer" => [
+              "email"=>  $email
+           ],
+           "customizations"=> [
+              "title"=> "Pied Piper Payments",
+              "description"=> "Middleout isn't free. Pay the price",
+              "logo"=> "https://assets.piedpiper.com/logo.png"
+           ]
+        ];
 
 
-                $curl = curl_init();
-
-                curl_setopt_array($curl, array(
-                  CURLOPT_URL            => "https://api.flutterwave.com/v3/payments",
-                    CURLOPT_RETURNTRANSFER => true,
-                    CURLOPT_ENCODING       => '',
-                    CURLOPT_FOLLOWLOCATION => true,
-                    CURLOPT_TIMEOUT       =>  0,
-                    CURLOPT_MAXREDIRS      => 10,
-                  CURLOPT_CUSTOMREQUEST  => "POST",
-                  CURLOPT_POSTFIELDS     => json_encode($collected_data),
-                    CURLOPT_HTTPHEADER => array(
-                    "Authorization: FLWSECK-6180b3f1f4a4a824604c5b183cebd3d1-X",
-                    "content-type: application/json",
-                    "cache-control: no-cache"       
-                  ),
-                ));
+        
+        //send Data to flutterwave Endpoints::-->
 
 
-                $response = curl_exec($curl);
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+        CURLOPT_URL            => "https://api.flutterwave.com/v3/payments",
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING       => '',
+        CURLOPT_FOLLOWLOCATION => true,
+        CURLOPT_TIMEOUT       =>  0,
+        CURLOPT_MAXREDIRS      => 10,
+        CURLOPT_CUSTOMREQUEST  => "POST",
+        CURLOPT_POSTFIELDS     => json_encode($collected_data),
+            CURLOPT_HTTPHEADER => array(
+            "Authorization: FLWSECK-6180b3f1f4a4a824604c5b183cebd3d1-X",
+            "content-type: application/json",
+            "cache-control: no-cache"           
+        ),
+        ));
 
 
-                //Decode the JSON request
-
-                $result = json_decode($response);
+        $response = curl_exec($curl);
 
 
-                //Check if the the result status is successful -->
+        //Decode the JSON request
 
-                if (!empty($result)) {
-                  
-                  if ($result->status  == "success") {
-
-                   
-                    $link  = $result->data->link;
-
-                    return redirect()->to($link);
+        $result = json_decode($response);
 
 
+        //Check if the the result status is successful -->
 
-                  }else{
+        if (!empty($result)) {
+            
+            if ($result->status  == "success") {
+            
+                $link  = $result->data->link;
 
-                    echo "We cannot process your request!";
-                  }
+                return redirect()->to($link);
+
+            }else{
+
+                echo "We cannot process your request!";
+            }
 
 
-                }else{
+        }else{
 
-                  echo"Check your Internet Connection Please seems you are not connected!";
+            echo"Check your Internet Connection Please seems you are not connected!";
+        }
 
-                }
+
 
     }
 } 
